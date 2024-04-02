@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="900.0" maxWidth="1600.0" minHeight="900.0" minWidth="1600.0" styleClass="pane" stylesheets="@css/stylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.raport_mistrza_zmianowego.controllers.EditHighlightsController">
+   <ListView fx:id="contactNumbersListView" layoutX="60.0" layoutY="80.0" maxHeight="250.0" prefHeight="250.0" prefWidth="450.0" />
+   <TextField fx:id="contactNumberTextField" layoutX="86.0" layoutY="350.0" prefWidth="150.0" promptText="numer telefonu" />
+   <ComboBox fx:id="objectOfContactNumberComboBox" layoutX="298.0" layoutY="350.0" prefWidth="150.0" promptText="obiekt" styleClass="text-field" />
+   <Button fx:id="deleteContactNumbersButton" layoutX="536.0" layoutY="299.0" mnemonicParsing="false" onAction="#deleteContactNumber" prefWidth="125.0" styleClass="button-light" text="Usuń" />
+   <Button fx:id="saveContactNumbersButton" layoutX="536.0" layoutY="247.0" mnemonicParsing="false" onAction="#saveContactNumber" prefWidth="125.0" styleClass="button-dark" text="Zapisz" />
+   <Button fx:id="addContactNumbersButton" layoutX="536.0" layoutY="198.0" mnemonicParsing="false" onAction="#addContactNumber" prefWidth="125.0" styleClass="button-dark" text="Dodaj" />
+   <ListView fx:id="standingOrdersListView" layoutX="832.0" layoutY="80.0" prefHeight="250.0" prefWidth="450.0" />
+   <TextField fx:id="standingOrderTextField" layoutX="884.0" layoutY="350.0" prefWidth="350.0" promptText="nazwa zlecenia" />
+   <Button fx:id="saveStandingOrderButton" layoutX="1320.0" layoutY="248.0" mnemonicParsing="false" onAction="#saveStandingOrder" prefWidth="125.0" styleClass="button-dark" text="Zapisz" />
+   <Button fx:id="addStandingOrderButton" layoutX="1320.0" layoutY="199.0" mnemonicParsing="false" onAction="#addStandingOrder" prefWidth="125.0" styleClass="button-dark" text="Dodaj" />
+   <Button fx:id="deleteStandingOrderButton" layoutX="1320.0" layoutY="300.0" mnemonicParsing="false" onAction="#deleteStandingOrder" prefWidth="125.0" styleClass="button-light" text="Usuń" />
+   <TableView fx:id="vehiclePricingTableView" layoutX="732.0" layoutY="505.0" prefHeight="275.0" prefWidth="650.0">
+      <columns>
+         <TableColumn fx:id="vehicleNameColumn" editable="false" prefWidth="200.0" resizable="false" text="Nazwa pojazdu" />
+         <TableColumn fx:id="regularPricingColumn" editable="false" prefWidth="225.0" resizable="false" text="Dni robocze 7:00 - 15:00" />
+         <TableColumn fx:id="overtimePricingColumn" editable="false" prefWidth="225.0" resizable="false" text="po 15:00 + weekend + święta" />
+      </columns>
+   </TableView>
+   <TextField fx:id="vehicleNameTextField" layoutX="771.0" layoutY="800.0" prefWidth="175.0" promptText="nazwa pojazdu" />
+   <TextField fx:id="regularPricingTextField" layoutX="971.0" layoutY="800.0" prefWidth="175.0" promptText="dni robocze" />
+   <TextField fx:id="overtimePricingTextField" layoutX="1169.0" layoutY="800.0" prefWidth="175.0" promptText="nadgodziny" />
+   <Button fx:id="addVehiclePricingButton" layoutX="1429.0" layoutY="637.0" mnemonicParsing="false" onAction="#addVehiclePricing" prefWidth="125.0" styleClass="button-dark" text="Dodaj" />
+   <Button fx:id="saveVehiclePricingButton" layoutX="1429.0" layoutY="691.0" mnemonicParsing="false" onAction="#saveVehiclePricing" prefWidth="125.0" styleClass="button-dark" text="Zapisz" />
+   <Button fx:id="deleteVehiclePricingButton" layoutX="1429.0" layoutY="742.0" mnemonicParsing="false" onAction="#deleteVehiclePricing" prefWidth="125.0" styleClass="button-light" text="Usuń" />
+   <ListView fx:id="drivingCostAccountsListView" layoutX="60.0" layoutY="505.0" prefHeight="250.0" prefWidth="350.0" />
+   <TextField fx:id="drivingCostAccountNumberTextField" layoutX="75.0" layoutY="800.0" prefHeight="27.0" prefWidth="60.0" promptText="nr konta" />
+   <TextField fx:id="drivingCostAccountsNameTextField" layoutX="155.0" layoutY="800.0" prefHeight="26.0" prefWidth="219.0" promptText="nazwa konta" />
+   <Button fx:id="addDrivingCostAccountButton" layoutX="465.0" layoutY="612.0" mnemonicParsing="false" onAction="#addDrivingCostAccount" prefWidth="125.0" styleClass="button-dark" text="Dodaj" />
+   <Button fx:id="saveDrivingCostAccountButton" layoutX="465.0" layoutY="674.0" mnemonicParsing="false" onAction="#saveDrivingCostAccount" prefWidth="125.0" styleClass="button-dark" text="Zapisz" />
+   <Button fx:id="deleteDrivingCostAccountButton" layoutX="465.0" layoutY="732.0" mnemonicParsing="false" onAction="#deleteDrivingCostAccount" prefWidth="125.0" styleClass="button-light" text="Usuń" />
+   <Text layoutX="164.0" layoutY="480.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edycja kont kosztów">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Text>
+   <Text layoutX="176.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edycja numerów kontaktowych">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Text>
+   <Text layoutX="984.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edycja zleceń stałych">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Text>
+   <Text layoutX="969.0" layoutY="480.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edycja cenniku pojazdów">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Text>
+</AnchorPane>

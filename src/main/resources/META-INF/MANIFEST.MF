@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: com.example.raport_mistrza_zmianowego.Main
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="900.0" maxWidth="1600.0" minHeight="900.0" minWidth="1600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.raport_mistrza_zmianowego.controllers.AboutController">
+    <children>
+        <Text layoutX="1167.0" layoutY="628.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wersja v1.1.4" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="50.0">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+        <Text layoutX="63.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program został stworzony w ramach praktyki zawodowej przez Bartosza Ziajka">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Text>
+      <Text layoutX="63.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Co nowego?">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+    </children>
+</AnchorPane>

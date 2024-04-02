@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.example.raport_mistrza_zmianowego.core.controls.MaskField?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="900.0" maxWidth="1600.0" minHeight="900.0" minWidth="1600.0" styleClass="pane"
+            stylesheets="@css/stylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.raport_mistrza_zmianowego.controllers.AddSpecialReportController">
+    <Text layoutX="92.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dane raportu specjalnego">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Text>
+    <DatePicker fx:id="datePicker" layoutX="63.0" layoutY="55.0" prefWidth="250.0" promptText="Data raportu"
+                style="-fx-border-width: 0 0 0 0;" styleClass="text-field"/>
+    <ComboBox fx:id="workingHoursComboBox" layoutX="63.0" layoutY="95.0" prefHeight="27.0" prefWidth="250.0"
+              promptText="Godziny pracy" styleClass="text-field" editable="true"/>
+    <TextField fx:id="shiftMasterTextField" editable="false" layoutX="63.0" layoutY="135.0" prefWidth="250.0"
+               promptText="Mistrz zmiany" styleClass="text-field"/>
+    <Text layoutX="421.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Portierzy">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Text>
+    <MaskField layoutX="385.0" layoutY="55.0" prefWidth="50.0" promptText="do" fx:id="porterUntilHourMaskField"/>
+    <ComboBox fx:id="porterUntilComboBox" editable="true" layoutX="585.0" layoutY="55.0" prefHeight="27.0"
+              prefWidth="50.0" styleClass="text-field"/>
+    <TextField fx:id="porterUntilTextField" layoutX="445.0" layoutY="55.0" prefHeight="27.0" prefWidth="170.0"
+               promptText="portier"/>
+    <MaskField layoutX="385.0" layoutY="95.0" prefWidth="50.0" promptText="od" fx:id="porterFromHourMaskField"/>
+    <ComboBox fx:id="porterFromComboBox" editable="true" layoutX="585.0" layoutY="95.0" prefHeight="27.0"
+              prefWidth="50.0" styleClass="text-field"/>
+    <TextField fx:id="porterFromTextField" layoutX="445.0" layoutY="96.0" prefWidth="170.0" promptText="portier"/>
+    <Text layoutX="317.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dyżurni">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Text>
+    <Text layoutX="120.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I zmiana (7:00 - 19:00)">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Text>
+    <ComboBox fx:id="standbyZasoleComboBox" editable="true" layoutX="260.0" layoutY="295.0" prefHeight="26.0"
+              prefWidth="50.0" styleClass="text-field"/>
+    <TextField fx:id="standbyZasoleTextField" layoutX="60.0" layoutY="295.0" prefHeight="26.0" prefWidth="230.0"
+               promptText="SUW Zasole"/>
+    <Text layoutX="435.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="II zmiana (19:00 - 7:00)">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Text>
+    <ComboBox fx:id="standbyZasoleComboBoxSecondShift" editable="true" layoutX="575.0" layoutY="295.0" prefHeight="26.0"
+              prefWidth="50.0" styleClass="text-field"/>
+    <TextField fx:id="standbyZasoleTextFieldSecondShift" layoutX="375.0" layoutY="295.0" prefWidth="230.0"
+               promptText="SUW Zasole"/>
+    <Text layoutX="120.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I zmiana (7:00 - 19:00)">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Text>
+    <ComboBox fx:id="standbyZaborzeComboBox" editable="true" layoutX="260.0" layoutY="355.0" prefHeight="26.0"
+              prefWidth="50.0" styleClass="text-field"/>
+    <TextField fx:id="standbyZaborzeTextField" layoutX="60.0" layoutY="355.0" prefWidth="230.0" promptText="SUW Zaborze"/>
+    <Text layoutX="435.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="II zmiana (19:00 - 7:00)">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Text>
+    <ComboBox fx:id="standbyZaborzeComboBoxSecondShift" editable="true" layoutX="575.0" layoutY="355.0" prefHeight="26.0"
+              prefWidth="50.0" styleClass="text-field"/>
+    <TextField fx:id="standbyZaborzeTextFieldSecondShift" layoutX="375.0" layoutY="355.0" prefWidth="230.0"
+               promptText="SUW Zaborze"/>
+    <Text layoutX="120.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I zmiana (7:00 - 19:00)">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Text>
+    <ComboBox fx:id="standbyHydroforniaComboBox" editable="true" layoutX="260.0" layoutY="415.0" prefHeight="26.0"
+              prefWidth="50.0" styleClass="text-field"/>
+    <TextField fx:id="standbyHydroforniaTextField" layoutX="60.0" layoutY="415.0" prefWidth="230.0"
+               promptText="Centralna Hydrofornia"/>
+    <Text layoutX="435.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" text="II zmiana (19:00 - 7:00)">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Text>
+    <ComboBox fx:id="standbyHydroforniaComboBoxSecondShift" editable="true" layoutX="575.0" layoutY="415.0"
+              prefHeight="26.0" prefWidth="50.0" styleClass="text-field"/>
+    <TextField fx:id="standbyHydroforniaTextFieldSecondShift" layoutX="375.0" layoutY="415.0" prefWidth="230.0"
+               promptText="Centralna Hydrofornia"/>
+    <Text layoutX="120.0" layoutY="470.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I zmiana (7:00 - 15:00)">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Text>
+    <ComboBox fx:id="standbyPrzepompowniaComboBox" editable="true" layoutX="260.0" layoutY="475.0" prefHeight="26.0"
+              prefWidth="50.0" styleClass="text-field"/>
+    <TextField fx:id="standbyPrzepompowniaTextField" layoutX="60.0" layoutY="475.0" prefWidth="230.0"
+               promptText="Przepompownia ścieków"/>
+    <Text layoutX="435.0" layoutY="470.0" strokeType="OUTSIDE" strokeWidth="0.0" text="II zmiana (15:00 - 23:00)">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Text>
+    <ComboBox fx:id="standbyPrzepompowniaComboBoxSecondShift" editable="true" layoutX="575.0" layoutY="475.0"
+              prefHeight="26.0" prefWidth="50.0" styleClass="text-field"/>
+    <TextField fx:id="standbyPrzepompowniaTextFieldSecondShift" layoutX="375.0" layoutY="475.0" prefWidth="230.0"
+               promptText="Przepompownia ścieków"/>
+    <TextArea fx:id="shiftReportTextArea" layoutX="725.0" layoutY="300.0" prefHeight="200.0" prefWidth="800.0"
+              promptText="Raport zmiany" wrapText="true"/>
+    <Text layoutX="1100.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dane z obiektów">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Text>
+    <Text layoutX="894.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="godzina 8:00/15:00"/>
+    <Text layoutX="1121.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="godzina 14:00/20:00"/>
+    <Text layoutX="757.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SUW Zasole"/>
+    <Text layoutX="748.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SUW Zaborze"/>
+    <Text layoutX="753.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Centralna Hydrofornia"
+          wrappingWidth="80.0"/>
+    <Text layoutX="863.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="poziom wody [m]"
+          textAlignment="CENTER" wrappingWidth="50.0">
+        <font>
+            <Font size="10.0"/>
+        </font>
+    </Text>
+    <TextField fx:id="pw15ZasoleTextField" layoutX="838.0" layoutY="112.0" prefHeight="25.0" prefWidth="100.0"/>
+    <Text layoutX="970.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ciśnienie [atm] lub [bar]"
+          textAlignment="CENTER" wrappingWidth="65.0">
+        <font>
+            <Font size="10.0"/>
+        </font>
+    </Text>
+    <TextField fx:id="c15ZasoleTextField" layoutX="952.0" layoutY="112.0" prefHeight="25.0" prefWidth="100.0"/>
+    <Text layoutX="1091.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="poziom wody [m]"
+          textAlignment="CENTER" wrappingWidth="50.0">
+        <font>
+            <Font size="10.0"/>
+        </font>
+    </Text>
+    <TextField fx:id="pw20ZasoleTextField" layoutX="1066.0" layoutY="112.0" prefHeight="25.0" prefWidth="100.0"/>
+    <Text layoutX="1200.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ciśnienie [atm] lub [bar]"
+          textAlignment="CENTER" wrappingWidth="65.0">
+        <font>
+            <Font size="10.0"/>
+        </font>
+    </Text>
+    <TextField fx:id="c20ZasoleTextField" layoutX="1182.0" layoutY="112.0" prefHeight="25.0" prefWidth="100.0"/>
+    <Text layoutX="1320.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="przepływ min. [m3/h]"
+          textAlignment="CENTER" wrappingWidth="55.0">
+        <font>
+            <Font size="10.0"/>
+        </font>
+    </Text>
+    <TextField fx:id="przepMinZasoleTextField" layoutX="1297.0" layoutY="112.0" prefHeight="25.0" prefWidth="100.0"/>
+    <Text layoutX="1434.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="przepływ max. [m3/h]"
+          textAlignment="CENTER" wrappingWidth="55.0">
+        <font>
+            <Font size="10.0"/>
+        </font>
+    </Text>
+    <TextField fx:id="przepMaxZasoleTextField" layoutX="1411.0" layoutY="112.0" prefHeight="25.0" prefWidth="100.0"/>
+    <TextField fx:id="pw15ZaborzeTextField" layoutX="838.0" layoutY="145.0" prefHeight="25.0" prefWidth="100.0"/>
+    <TextField fx:id="c15ZaborzeTextField" layoutX="952.0" layoutY="145.0" prefHeight="25.0" prefWidth="100.0"/>
+    <TextField fx:id="pw20ZaborzeTextField" layoutX="1066.0" layoutY="145.0" prefHeight="25.0" prefWidth="100.0"/>
+    <TextField fx:id="c20ZaborzeTextField" layoutX="1182.0" layoutY="145.0" prefHeight="25.0" prefWidth="100.0"/>
+    <TextField fx:id="przepMinZaborzeTextField" layoutX="1297.0" layoutY="145.0" prefHeight="25.0" prefWidth="100.0"/>
+    <TextField fx:id="przepMaxZaborzeTextField" layoutX="1411.0" layoutY="145.0" prefHeight="25.0" prefWidth="100.0"/>
+    <TextField fx:id="pw15HydroforniaTextField" layoutX="838.0" layoutY="177.0" prefHeight="25.0" prefWidth="100.0"/>
+    <TextField fx:id="c15HydroforniaTextField" layoutX="952.0" layoutY="177.0" prefHeight="25.0" prefWidth="100.0"/>
+    <TextField fx:id="pw20HydroforniaTextField" layoutX="1066.0" layoutY="177.0" prefHeight="25.0" prefWidth="100.0"/>
+    <TextField fx:id="c20HydroforniaTextField" layoutX="1182.0" layoutY="177.0" prefHeight="25.0" prefWidth="100.0"/>
+    <Text layoutX="732.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sprzedaż wody Chełmek"
+          textAlignment="RIGHT" wrappingWidth="91.15885162353516"/>
+    <Text layoutX="877.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Odczyt (stan urządzenia pomiarowego)" textAlignment="CENTER" wrappingWidth="148.15104675292966">
+        <font>
+            <Font size="11.0"/>
+        </font>
+    </Text>
+    <TextField fx:id="odczytChelmekTextField" layoutX="1066.0" layoutY="215.0" prefHeight="25.0" prefWidth="100.0"/>
+    <Text layoutX="1243.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zużycie [m3]"
+          textAlignment="CENTER" wrappingWidth="130.4036407470703">
+        <font>
+            <Font size="11.0"/>
+        </font>
+    </Text>
+    <TextField fx:id="zuzycieChelmekTextField" layoutX="1411.0" layoutY="215.0" prefHeight="25.0" prefWidth="100.0"/>
+    <Text layoutX="575.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Pracownicy pracujący po godzinie 15:00">
+        <font>
+            <Font size="16.0"/>
+        </font>
+    </Text>
+    <ComboBox fx:id="overtimesEmployeeComboBox" editable="true" layoutX="20.0" layoutY="550.0" prefWidth="150.0"
+              promptText="imię i nazwisko" styleClass="text-field"/>
+    <MaskField fx:id="overtimesFromMaskField" layoutX="190.0" layoutY="550.0" prefHeight="25.0" prefWidth="72.0"
+               promptText="od godz"/>
+    <MaskField fx:id="overtimesUntilMaskField" layoutX="280.0" layoutY="550.0" prefHeight="25.0" prefWidth="72.0"
+               promptText="do godz"/>
+    <TextField fx:id="overtimesTypeTextField" layoutX="365.0" layoutY="550.0" prefHeight="26.0" prefWidth="700.0"
+               promptText="rodzaj pracy"/>
+    <Button fx:id="insertEmployeeButton" layoutX="1106.0" layoutY="548.0" mnemonicParsing="false"
+            onAction="#insertOvertimeToTable" prefWidth="150.0" styleClass="button-dark" text="Wprowadź pracownika"/>
+    <Button fx:id="createReportButton" layoutX="1448.0" layoutY="830.0" mnemonicParsing="false" onAction="#createSpecialReport"
+            prefWidth="125.0" styleClass="button-dark" text="Dodaj raport"/>
+    <Button fx:id="deleteEmployeeButton" layoutX="1272.0" layoutY="548.0" mnemonicParsing="false"
+            onAction="#deleteOvertime" prefWidth="150.0" styleClass="button-light" text="Usuń pracownika"/>
+    <TableView fx:id="overtimesTableView" layoutX="20.0" layoutY="585.0" prefHeight="275.0" prefWidth="1400.0">
+        <placeholder>
+            <Label text="Nie wprowadzono pracowników"/>
+        </placeholder>
+        <columns>
+            <TableColumn fx:id="nameAndSurnameColumn" prefWidth="150.0" text="imię i nazwisko"/>
+            <TableColumn fx:id="overtimeFromColumn" prefWidth="75.0" text="od godz"/>
+            <TableColumn fx:id="overtimeUntilColumn" prefWidth="75.0" text="do godz"/>
+            <TableColumn fx:id="typeOfWorkColumn" prefWidth="1098.0" resizable="false" text="rodzaj pracy"/>
+        </columns>
+    </TableView>
+</AnchorPane>

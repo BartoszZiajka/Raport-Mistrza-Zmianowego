@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="900.0" maxWidth="1600.0" minHeight="900.0" minWidth="1600.0" styleClass="pane" stylesheets="@css/stylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.raport_mistrza_zmianowego.controllers.HighlightsController">
+    <Text layoutX="267.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numery Telefonów - obiekty PWIK">
+      <font>
+         <Font size="16.0" />
+      </font></Text>
+    <Separator layoutX="267.0" layoutY="101.0" prefWidth="225.0" />
+    <Text layoutX="273.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SUW Zasole" />
+    <Text layoutX="408.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0-33 8432814" />
+    <Text layoutX="408.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0-33 8432877" />
+    <Text layoutX="408.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0-33 8431715" />
+    <Text layoutX="408.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0-697 771 737" />
+    <Separator layoutX="267.0" layoutY="170.0" prefWidth="225.0" />
+    <Text layoutX="273.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SUW Zaborze" />
+    <Text layoutX="408.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0-33 8422489" />
+    <Text layoutX="408.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0-697 771 735" />
+    <Separator layoutX="267.0" layoutY="206.0" prefWidth="225.0" />
+    <Text layoutX="273.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pompownia Ścieków" />
+    <Text layoutX="408.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0-33 8424222" />
+    <Text layoutX="408.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0-697 771 702" />
+    <Separator layoutX="267.0" layoutY="242.0" prefWidth="225.0" />
+    <Text layoutX="273.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Centralna Hydrofornia" />
+    <Text layoutX="408.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0-33 8423645" />
+    <Text layoutX="408.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0-697 771 738" />
+    <Separator layoutX="267.0" layoutY="283.0" prefWidth="225.0" />
+   <ListView fx:id="drivingCostAccountsListView" layoutX="640.0" layoutY="70.0" prefHeight="572.0" prefWidth="250.0" />
+   <Text layoutX="640.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Konta do określenia kosztów jazdy podczas pełnienia dyżuru" />
+</AnchorPane>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="pane" maxHeight="900.0" maxWidth="1600.0" minHeight="900.0" minWidth="1600.0" styleClass="pane" stylesheets="@css/stylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.raport_mistrza_zmianowego.controllers.SettingsController">
+    <Button fx:id="saveDatabaseLocationButton" layoutX="1115.0" layoutY="636.0" mnemonicParsing="false" onAction="#saveDatabaseLocation" prefWidth="125.0" styleClass="button-light" text="Zapisz" />
+    <TextField fx:id="databaseLocationTextField" layoutX="186.0" layoutY="60.0" AnchorPane.leftAnchor="186.0" AnchorPane.rightAnchor="554.0" />
+    <TextField fx:id="databasePasswordTextField" layoutX="186.0" layoutY="180.0" />
+    <TextField fx:id="databaseUserTextField" layoutX="186.0" layoutY="120.0" />
+   <Text layoutX="14.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lokalizacja bazy danych" />
+   <Text layoutX="37.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwa użytkownika" />
+   <Text layoutX="64.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hasło do bazy" />
+
+</AnchorPane>

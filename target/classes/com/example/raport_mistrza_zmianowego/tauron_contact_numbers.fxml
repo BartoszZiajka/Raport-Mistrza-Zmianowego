@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane minHeight="700.0" minWidth="1100.0" styleClass="pane" stylesheets="@css/stylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.raport_mistrza_zmianowego.controllers.TauronContactNumbersController">
+    <TableView fx:id="tauronContactNumbersTableView" layoutX="45.0" layoutY="96.0" prefHeight="350.0" prefWidth="1000.0">
+        <columns>
+            <TableColumn fx:id="authorisedPersonsColumn" prefWidth="250.0" text="Osoby uprawnione" />
+            <TableColumn fx:id="workplaceColumn" prefWidth="300.0" text="Stanowisko" />
+            <TableColumn fx:id="emailColumn" prefWidth="250.0" text="E-mail" />
+            <TableColumn fx:id="contactNumberColumn" prefWidth="200.0" text="Numer kontaktowy" />
+        </columns>
+    </TableView>
+    <Text layoutX="422.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numery kontaktowe Tauron">
+        <font>
+            <Font size="20.0" />
+        </font>
+    </Text>
+    <Text layoutX="45.0" layoutY="545.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Obszar Wadowice" />
+    <Text layoutX="45.0" layoutY="580.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Obszar Kęty" />
+    <Text layoutX="45.0" layoutY="615.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Obszar Żywiec" />
+    <Text layoutX="45.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fax" />
+    <Text layoutX="45.0" layoutY="650.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wydział Ruchu" />
+    <TextField fx:id="faxTextField" editable="false" layoutX="155.0" layoutY="492.0" prefWidth="900.0" style="-fx-border-color: white;" text="33-813-1661" />
+    <TextField fx:id="areaWadowiceTextField" editable="false" layoutX="155.0" layoutY="527.0" prefHeight="26.0" prefWidth="900.0" style="-fx-border-color: white;" text="33-813-1794; 33-498-1794; 500-99-1794; nr rezerwowy 33-828-7044" />
+    <TextField fx:id="areaKetyTextField" editable="false" layoutX="155.0" layoutY="562.0" prefHeight="26.0" prefWidth="900.0" style="-fx-border-color: white;" text="33-813-1464; 33-498-1464; 500-99-1464; nr rezerwowy 33-828-7064" />
+    <TextField fx:id="areaZywiecTextField" editable="false" layoutX="155.0" layoutY="597.0" prefHeight="26.0" prefWidth="900.0" style="-fx-border-color: white;" text="33-813-1474; 33-498-1474; 500-99-1474; nr rezerwowy 33-828-7054" />
+    <TextField fx:id="trafficDepartmentTextField" editable="false" layoutX="155.0" layoutY="632.0" prefHeight="26.0" prefWidth="900.0" style="-fx-border-color: white;" text="33-813-1675; td.obb.odr@tauron-dystrybucja.pl" />
+    <Button fx:id="addNumberButton" layoutX="809.0" layoutY="458.0" mnemonicParsing="false" onAction="#addTauronPhoneNumber" prefWidth="100.0" styleClass="button-dark" text="Dodaj" visible="false" />
+    <Button fx:id="deleteNumberButton" layoutX="945.0" layoutY="458.0" mnemonicParsing="false" onAction="#deleteTauronContactNumber" prefWidth="100.0" styleClass="button-light" text="Usuń" visible="false" />
+    <TextField fx:id="authorisedPersonsTextField" layoutX="47.0" layoutY="465.0" prefWidth="175.0" promptText="Osoba uprawniona" visible="false" />
+    <TextField fx:id="workplaceTextField" layoutX="231.0" layoutY="465.0" prefWidth="175.0" promptText="Stanowisko" visible="false" />
+    <TextField fx:id="emailTextField" layoutX="415.0" layoutY="465.0" prefWidth="175.0" promptText="E-mail" visible="false" />
+    <TextField fx:id="contactNumberTextField" layoutX="605.0" layoutY="465.0" prefWidth="150.0" promptText="Numer kontaktowy" visible="false" />
+</AnchorPane>
