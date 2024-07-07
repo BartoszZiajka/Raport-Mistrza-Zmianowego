@@ -3,6 +3,7 @@ package com.example.raport_mistrza_zmianowego.controllers;
 import com.example.raport_mistrza_zmianowego.core.connectors.OvertimesConnector;
 import com.example.raport_mistrza_zmianowego.core.connectors.ReportConnector;
 import com.example.raport_mistrza_zmianowego.core.model.Overtime;
+import com.example.raport_mistrza_zmianowego.core.model.Report;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -22,7 +23,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class ShowRaportsController implements Initializable {
@@ -126,8 +126,10 @@ public class ShowRaportsController implements Initializable {
         ObservableList<String> raportDates = reportConnector.getReportDates();
         raportsListView.setItems(raportDates);
 //        load the newest showing report
-        if (!raportDates.isEmpty())
-            loadReport(raportDates.get(0));
+        if (!raportDates.isEmpty()) {
+            raportsListView.getSelectionModel().selectFirst();
+            loadReport(raportsListView.getSelectionModel().getSelectedItem());
+        }
 //        set listener to ListView to change displaying reports
         raportsListView.setOnMouseClicked(event -> loadReport(raportsListView.getSelectionModel().getSelectedItem()));
 //        set cells values names
@@ -149,42 +151,43 @@ public class ShowRaportsController implements Initializable {
     }
 
     private void loadReport(String raportDate) {
-        Map<String, String> raport = reportConnector.getReportFrom(raportDate.substring(0, 10), raportDate.substring(11));
-        dataText.setText(raport.get("data_raportu"));
-        workingHoursText.setText(raport.get("godziny_pracy"));
-        shiftMasterText.setText(raport.get("mistrz_zmiany"));
-        porterUntilText.setText(raport.get("do_godz") + " " + raport.get("portier_do"));
-        porterFromText.setText(raport.get("od_godz") + " " + raport.get("portier_od"));
-        standbyZasoleText.setText(raport.get("dyzur_zasole"));
-        standbyZasoleText1.setText(raport.get("dyzur_zasole_2_zmiana"));
-        standbyZaborzeText.setText(raport.get("dyzur_zaborze"));
-        standbyZaborzeText1.setText(raport.get("dyzur_zaborze_2_zmiana"));
-        standbyHydroforniaText.setText(raport.get("dyzur_hydrofornia"));
-        standbyHydroforniaText1.setText(raport.get("dyzur_hydrofornia_2_zmiana"));
-        standbyPrzepompowniaText.setText(raport.get("dyzur_przepompownia"));
-        standbyPrzepompowniaText1.setText(raport.get("dyzur_przepompownia_2_zmiana"));
-        shiftReportTextArea.setText(raport.get("raport_zmiany"));
-        pw15ZasoleText.setText(raport.get("pw15_zasole"));
-        c15ZasoleText.setText(raport.get("c15_zasole"));
-        pw20ZasoleText.setText(raport.get("pw20_zasole"));
-        c20ZasoleText.setText(raport.get("c20_zasole"));
-        przepMinZasoleText.setText(raport.get("przeplyw_min_zasole"));
-        przepMaxZasoleText.setText(raport.get("przeplyw_max_zasole"));
-        pw15ZaborzeText.setText(raport.get("pw15_zaborze"));
-        c15ZaborzeText.setText(raport.get("c15_zaborze"));
-        pw20ZaborzeText.setText(raport.get("pw20_zaborze"));
-        c20ZaborzeText.setText(raport.get("c20_zaborze"));
-        przepMinZaborzeText.setText(raport.get("przeplyw_min_zaborze"));
-        przepMaxZaborzeText.setText(raport.get("przeplyw_max_zaborze"));
-        pw15HydroforniaText.setText(raport.get("pw15_hydrofornia"));
-        c15HydroforniaText.setText(raport.get("c15_hydrofornia"));
-        pw20HydroforniaText.setText(raport.get("pw20_hydrofornia"));
-        c20HydroforniaText.setText(raport.get("c20_hydrofornia"));
-        odczytChelmekText.setText(raport.get("odczyt_chelmek"));
-        zuzycieChelmekText.setText(raport.get("zuzycie_chelmek"));
+        String[] arr = raportDate.split("\\s");
+        Report report = reportConnector.getReportById(Integer.parseInt(arr[0]));
+        dataText.setText(report.getReportDate());
+        workingHoursText.setText(report.getWorkingHours());
+        shiftMasterText.setText(report.getDutyOfficer());
+        porterUntilText.setText(report.getPorterHourTo() + " " + report.getPorterNameTo());
+        porterFromText.setText(report.getPorterHourFrom() + " " + report.getPorterNameFrom());
+        standbyZasoleText.setText(report.getStandbyZasoleFirstShift());
+        standbyZasoleText1.setText(report.getStandbyZasoleSecondShift());
+        standbyZaborzeText.setText(report.getStandbyZaborzeFirstShift());
+        standbyZaborzeText1.setText(report.getStandbyZaborzeSecondShift());
+        standbyHydroforniaText.setText(report.getStandbyHydroforniaFirstShift());
+        standbyHydroforniaText1.setText(report.getStandbyHydroforniaSecondShift());
+        standbyPrzepompowniaText.setText(report.getStandbyPrzepompowniaFirstShift());
+        standbyPrzepompowniaText1.setText(report.getStandbyPrzepompowniaSecondShift());
+        shiftReportTextArea.setText(report.getShiftReport());
+        pw15ZasoleText.setText(report.getPw15Zasole());
+        c15ZasoleText.setText(report.getC15Zasole());
+        pw20ZasoleText.setText(report.getPw20Zasole());
+        c20ZasoleText.setText(report.getC20Zasole());
+        przepMinZasoleText.setText(report.getPrzeplywMinZasole());
+        przepMaxZasoleText.setText(report.getPrzeplywMaxZasole());
+        pw15ZaborzeText.setText(report.getPw15Zaborze());
+        c15ZaborzeText.setText(report.getC15Zaborze());
+        pw20ZaborzeText.setText(report.getPw20Zaborze());
+        c20ZaborzeText.setText(report.getC20Zaborze());
+        przepMinZaborzeText.setText(report.getPrzeplywMinZaborze());
+        przepMaxZaborzeText.setText(report.getPrzeplywMaxZaborze());
+        pw15HydroforniaText.setText(report.getPw15Hydrofornia());
+        c15HydroforniaText.setText(report.getC15Hydrofornia());
+        pw20HydroforniaText.setText(report.getPw20Hydrofornia());
+        c20HydroforniaText.setText(report.getC20Hydrofornia());
+        odczytChelmekText.setText(report.getSprzedazChelmek());
+        zuzycieChelmekText.setText(report.getZuzycieChelmek());
 
         overtimesTableView.getItems().clear();
-        List<Overtime> overtimes = overtimesConnector.getOvertimesFrom(reportConnector.getReportID(raportDate.substring(0, 10), raportDate.substring(11)));
+        List<Overtime> overtimes = overtimesConnector.getOvertimesById(Integer.parseInt(arr[0]));
         for (Overtime overtime : overtimes) overtimesTableView.getItems().add(overtime);
     }
 
@@ -455,7 +458,8 @@ public class ShowRaportsController implements Initializable {
     private void addOvertimesRows(PdfPTable table) {
         PdfPCell row = new PdfPCell();
         row.setVerticalAlignment(Element.ALIGN_MIDDLE);
-        List<Overtime> overtimes = overtimesConnector.getOvertimesFrom(reportConnector.getReportID(dataText.getText(), workingHoursText.getText()));
+        String[] arr = raportsListView.getSelectionModel().getSelectedItem().split("\\s");
+        List<Overtime> overtimes = overtimesConnector.getOvertimesById(Integer.parseInt(arr[0]));
         for (Overtime overtime : overtimes) {
             row.setColspan(3);
             row.setPhrase(new Phrase(overtime.getEmployee(), new Font(bf, 10)));
@@ -681,7 +685,7 @@ public class ShowRaportsController implements Initializable {
         PdfPCell row = new PdfPCell();
         row.setVerticalAlignment(Element.ALIGN_MIDDLE);
         row.setHorizontalAlignment(Element.ALIGN_CENTER);
-        List<Overtime> nadgodziny = overtimesConnector.getOvertimesFrom(reportConnector.getReportID(dataText.getText(), workingHoursText.getText()));
+        List<Overtime> nadgodziny = overtimesConnector.getOvertimesById(reportConnector.getReportID(dataText.getText(), workingHoursText.getText()));
         for (int i = 0, j = 1; i < nadgodziny.size(); i++, j++) {
             row.setColspan(1);
             row.setPhrase(new Phrase(String.valueOf(j), new Font(bf, 10)));

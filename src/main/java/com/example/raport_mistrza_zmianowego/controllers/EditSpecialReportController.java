@@ -6,6 +6,7 @@ import com.example.raport_mistrza_zmianowego.core.connectors.PortersConnector;
 import com.example.raport_mistrza_zmianowego.core.connectors.ReportConnector;
 import com.example.raport_mistrza_zmianowego.core.controls.MaskField;
 import com.example.raport_mistrza_zmianowego.core.model.Overtime;
+import com.example.raport_mistrza_zmianowego.core.model.Report;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -143,7 +144,7 @@ public class EditSpecialReportController implements Initializable {
     private PortersConnector portersConnector;
     private DutyOfficersConnector dutyOfficersConnector;
     private ReportConnector reportConnector;
-    private Map<String, String> loadedRaport;
+    private Report loadedReport;
     private List<String> entriesList;
 
     @Override
@@ -156,54 +157,53 @@ public class EditSpecialReportController implements Initializable {
     }
 
     private void loadReport(String raportDate) {
-        loadedRaport = reportConnector.getReportFrom(raportDate.substring(0, 10), raportDate.substring(11));
-        if (!loadedRaport.isEmpty()) {
-            datePicker.setValue(LocalDate.parse(loadedRaport.get("data_raportu")));
-            datePicker.getEditor().setText(loadedRaport.get("data_raportu"));
-            workingHoursComboBox.setValue(loadedRaport.get("godziny_pracy"));
-            shiftMasterTextField.setText(loadedRaport.get("mistrz_zmiany"));
-            porterUntilHourMaskField.setText(loadedRaport.get("do_godz"));
-            porterUntilTextField.setText(loadedRaport.get("portier_do"));
-            porterFromHourMaskField.setText(loadedRaport.get("od_godz"));
-            porterFromTextField.setText(loadedRaport.get("portier_od"));
-            standbyZasoleTextField.setText(loadedRaport.get("dyzur_zasole"));
-            standbyZasoleTextFieldSecondShift.setText(loadedRaport.get("dyzur_zasole_2_zmiana"));
-            standbyZaborzeTextField.setText(loadedRaport.get("dyzur_zaborze"));
-            standbyZaborzeTextFieldSecondShift.setText(loadedRaport.get("dyzur_zaborze_2_zmiana"));
-            standbyHydroforniaTextField.setText(loadedRaport.get("dyzur_hydrofornia"));
-            standbyHydroforniaTextFieldSecondShift.setText(loadedRaport.get("dyzur_hydrofornia_2_zmiana"));
-            standbyPrzepompowniaTextField.setText(loadedRaport.get("dyzur_przepompownia"));
-            standbyPrzepompowniaTextFieldSecondShift.setText(loadedRaport.get("dyzur_przepompownia_2_zmiana"));
-            shiftReportTextArea.setText(loadedRaport.get("raport_zmiany"));
-            pw15ZasoleTextField.setText(loadedRaport.get("pw15_zasole"));
-            c15ZasoleTextField.setText(loadedRaport.get("c15_zasole"));
-            pw20ZasoleTextField.setText(loadedRaport.get("pw20_zasole"));
-            c20ZasoleTextField.setText(loadedRaport.get("c20_zasole"));
-            przepMinZasoleTextField.setText(loadedRaport.get("przeplyw_min_zasole"));
-            przepMaxZasoleTextField.setText(loadedRaport.get("przeplyw_max_zasole"));
-            pw15ZaborzeTextField.setText(loadedRaport.get("pw15_zaborze"));
-            c15ZaborzeTextField.setText(loadedRaport.get("c15_zaborze"));
-            pw20ZaborzeTextField.setText(loadedRaport.get("pw20_zaborze"));
-            c20ZaborzeTextField.setText(loadedRaport.get("c20_zaborze"));
-            przepMinZaborzeTextField.setText(loadedRaport.get("przeplyw_min_zaborze"));
-            przepMaxZaborzeTextField.setText(loadedRaport.get("przeplyw_max_zaborze"));
-            pw15HydroforniaTextField.setText(loadedRaport.get("pw15_hydrofornia"));
-            c15HydroforniaTextField.setText(loadedRaport.get("c15_hydrofornia"));
-            pw20HydroforniaTextField.setText(loadedRaport.get("pw20_hydrofornia"));
-            c20HydroforniaTextField.setText(loadedRaport.get("c20_hydrofornia"));
-            odczytChelmekTextField.setText(loadedRaport.get("odczyt_chelmek"));
-            zuzycieChelmekTextField.setText(loadedRaport.get("zuzycie_chelmek"));
+        String[] arr = raportDate.split("\\s");
+        loadedReport = reportConnector.getReportById(Integer.parseInt(arr[0]));
+        datePicker.setValue(LocalDate.parse(loadedReport.getReportDate()));
+        datePicker.getEditor().setText(loadedReport.getReportDate());
+        workingHoursComboBox.setValue(loadedReport.getWorkingHours());
+        shiftMasterTextField.setText(loadedReport.getDutyOfficer());
+        porterUntilHourMaskField.setText(loadedReport.getPorterHourTo());
+        porterUntilTextField.setText(loadedReport.getPorterNameTo());
+        porterFromHourMaskField.setText(loadedReport.getPorterHourFrom());
+        porterFromTextField.setText(loadedReport.getPorterNameFrom());
+        standbyZasoleTextField.setText(loadedReport.getStandbyZasoleFirstShift());
+        standbyZasoleTextFieldSecondShift.setText(loadedReport.getStandbyZasoleSecondShift());
+        standbyZaborzeTextField.setText(loadedReport.getStandbyZaborzeFirstShift());
+        standbyZaborzeTextFieldSecondShift.setText(loadedReport.getStandbyZaborzeSecondShift());
+        standbyHydroforniaTextField.setText(loadedReport.getStandbyHydroforniaFirstShift());
+        standbyHydroforniaTextFieldSecondShift.setText(loadedReport.getStandbyHydroforniaSecondShift());
+        standbyPrzepompowniaTextField.setText(loadedReport.getStandbyPrzepompowniaFirstShift());
+        standbyPrzepompowniaTextFieldSecondShift.setText(loadedReport.getStandbyPrzepompowniaSecondShift());
+        shiftReportTextArea.setText(loadedReport.getShiftReport());
+        pw15ZasoleTextField.setText(loadedReport.getPw15Zasole());
+        c15ZasoleTextField.setText(loadedReport.getC15Zasole());
+        pw20ZasoleTextField.setText(loadedReport.getPw20Zasole());
+        c20ZasoleTextField.setText(loadedReport.getC20Zasole());
+        przepMinZasoleTextField.setText(loadedReport.getPrzeplywMinZasole());
+        przepMaxZasoleTextField.setText(loadedReport.getPrzeplywMaxZasole());
+        pw15ZaborzeTextField.setText(loadedReport.getPw15Zaborze());
+        c15ZaborzeTextField.setText(loadedReport.getC15Zaborze());
+        pw20ZaborzeTextField.setText(loadedReport.getPw20Zaborze());
+        c20ZaborzeTextField.setText(loadedReport.getC20Zaborze());
+        przepMinZaborzeTextField.setText(loadedReport.getPrzeplywMinZaborze());
+        przepMaxZaborzeTextField.setText(loadedReport.getPrzeplywMaxZaborze());
+        pw15HydroforniaTextField.setText(loadedReport.getPw15Hydrofornia());
+        c15HydroforniaTextField.setText(loadedReport.getC15Hydrofornia());
+        pw20HydroforniaTextField.setText(loadedReport.getPw20Hydrofornia());
+        c20HydroforniaTextField.setText(loadedReport.getC20Hydrofornia());
+        odczytChelmekTextField.setText(loadedReport.getSprzedazChelmek());
+        zuzycieChelmekTextField.setText(loadedReport.getZuzycieChelmek());
 
             overtimesTableView.getItems().clear();
 
-            List<Overtime> nadgodzinyFromDB = overtimesConnector.getOvertimesFrom(reportConnector.getReportID(raportDate.substring(0, 10), raportDate.substring(11)));
+            List<Overtime> nadgodzinyFromDB = overtimesConnector.getOvertimesById(loadedReport.getId());
             for (Overtime overtime : nadgodzinyFromDB) overtimesTableView.getItems().add(overtime);
 
             entriesList = new ArrayList<>();
             for (Overtime overtime : nadgodzinyFromDB)
                 if (!entriesList.contains(overtime.getWorkName())) entriesList.add(overtime.getWorkName());
             TextFields.bindAutoCompletion(overtimesTypeTextField, entriesList);
-        }
     }
 
     @FXML
@@ -242,7 +242,7 @@ public class EditSpecialReportController implements Initializable {
         overtimesConnector.deleteOvertime(new Overtime(overtimesEmployeeComboBox.getValue(), overtimesFromMaskField.getText(), overtimesUntilMaskField.getText(), overtimesTypeTextField.getText()));
         overtimesTableView.getItems().clear();
 
-        List<Overtime> nadgodzinyFromDB = overtimesConnector.getOvertimesFrom(reportConnector.getReportID(datePicker.getValue().toString(), workingHoursComboBox.getValue()));
+        List<Overtime> nadgodzinyFromDB = overtimesConnector.getOvertimesById(reportConnector.getReportID(datePicker.getValue().toString(), workingHoursComboBox.getValue()));
         for (Overtime overtime : nadgodzinyFromDB) overtimesTableView.getItems().add(overtime);
 
         List<String> entries = new ArrayList<>();
@@ -273,22 +273,52 @@ public class EditSpecialReportController implements Initializable {
             return;
         }
 
-        reportConnector.updateReport(String.valueOf(datePicker.getValue()), workingHoursComboBox.getValue(),
-                shiftMasterTextField.getText(), porterUntilHourMaskField.getText(), porterUntilTextField.getText(),
-                porterFromHourMaskField.getText(), porterFromTextField.getText(), standbyZasoleTextField.getText(),
-                standbyZasoleTextFieldSecondShift.getText(), standbyZaborzeTextField.getText(), standbyZaborzeTextFieldSecondShift.getText(),
-                standbyHydroforniaTextField.getText(), standbyHydroforniaTextFieldSecondShift.getText(), standbyPrzepompowniaTextField.getText(),
-                standbyPrzepompowniaTextFieldSecondShift.getText(), shiftReportTextArea.getText(), pw15ZasoleTextField.getText(),
-                c15ZasoleTextField.getText(), pw20ZasoleTextField.getText(), c20ZasoleTextField.getText(),
-                przepMinZasoleTextField.getText(), przepMaxZasoleTextField.getText(), pw15ZaborzeTextField.getText(),
-                c15ZaborzeTextField.getText(), pw20ZaborzeTextField.getText(), c20ZaborzeTextField.getText(),
-                przepMinZaborzeTextField.getText(), przepMaxZaborzeTextField.getText(), pw15HydroforniaTextField.getText(),
-                c15HydroforniaTextField.getText(), pw20HydroforniaTextField.getText(), c20HydroforniaTextField.getText(),
-                odczytChelmekTextField.getText(), zuzycieChelmekTextField.getText());
-        overtimesConnector.updateOvertimesRecords(overtimesTableView.getItems(), Integer.parseInt(loadedRaport.get("id_raportu")));
+        String raportDate = reportsListView.getSelectionModel().getSelectedItem();
+        String[] arr = raportDate.split("\\s");
+        Report report = new Report(
+                Integer.parseInt(arr[0]),
+                String.valueOf(datePicker.getValue()),
+                workingHoursComboBox.getValue(),
+                shiftMasterTextField.getText(),
+                porterFromHourMaskField.getText(),
+                porterUntilHourMaskField.getText(),
+                porterFromTextField.getText(),
+                porterUntilTextField.getText(),
+                standbyZasoleTextField.getText(),
+                standbyZasoleTextFieldSecondShift.getText(),
+                standbyZaborzeTextField.getText(),
+                standbyZaborzeTextFieldSecondShift.getText(),
+                standbyHydroforniaTextField.getText(),
+                standbyHydroforniaTextFieldSecondShift.getText(),
+                standbyPrzepompowniaTextField.getText(),
+                standbyPrzepompowniaTextFieldSecondShift.getText(),
+                pw15ZasoleTextField.getText(),
+                c15ZasoleTextField.getText(),
+                pw20ZasoleTextField.getText(),
+                c20ZasoleTextField.getText(),
+                przepMinZasoleTextField.getText(),
+                przepMaxZasoleTextField.getText(),
+                pw15ZaborzeTextField.getText(),
+                c15ZaborzeTextField.getText(),
+                pw20ZaborzeTextField.getText(),
+                c20ZaborzeTextField.getText(),
+                przepMinZaborzeTextField.getText(),
+                przepMaxZaborzeTextField.getText(),
+                pw15HydroforniaTextField.getText(),
+                c15HydroforniaTextField.getText(),
+                pw20HydroforniaTextField.getText(),
+                c20HydroforniaTextField.getText(),
+                odczytChelmekTextField.getText(),
+                zuzycieChelmekTextField.getText(),
+                shiftReportTextArea.getText(),
+                overtimesTableView.getItems()
+        );
+        reportConnector.updateReport(report);
+        overtimesConnector.updateOvertimesRecords(overtimesTableView.getItems(), loadedReport.getId());
 
         showAlert(Alert.AlertType.CONFIRMATION, "Sukces!", "Raport zmieniony pomyślnie");
-        loadReport(datePicker.getValue() + " " + workingHoursComboBox.getValue());
+        reportsListView.getSelectionModel().selectFirst();
+        loadReport(reportsListView.getSelectionModel().getSelectedItem());
     }
 
     private static void showAlert(Alert.AlertType alertType, String title, String message) {
@@ -312,8 +342,9 @@ public class EditSpecialReportController implements Initializable {
         if (LoginController.isAdmin) raportsDatesFromDatabase = reportConnector.getEditSpecialReportDates();
         else raportsDatesFromDatabase = reportConnector.getReportDates(LoginController.userAccountId);
         reportsListView.setItems(raportsDatesFromDatabase);
+        reportsListView.getSelectionModel().selectFirst();
 
-        if (!raportsDatesFromDatabase.isEmpty()) loadReport(raportsDatesFromDatabase.get(0));
+        if (!raportsDatesFromDatabase.isEmpty()) loadReport(reportsListView.getSelectionModel().getSelectedItem());
         reportsListView.setOnMouseClicked(event -> loadReport(reportsListView.getSelectionModel().getSelectedItem()));
 
     }

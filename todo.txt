@@ -1,0 +1,4 @@
+Todo:
+-stworzyć obiekt Raportu
+-stworzyć funkcje tworzącą obiekt raportu na podstawie danych z bazy
+-podmienić we wszystkich miejscach używanie obiektu

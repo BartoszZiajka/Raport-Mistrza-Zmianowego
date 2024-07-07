@@ -91,7 +91,7 @@ public class DataFromFacilitiesConnector {
         }
     }
 
-    public void updateDataFromFacilitiesRecord(String idDanychZObiektow, String pw15Zasole, String c15Zasole, String pw20Zasole, String c20Zasole, String przeplywMinZasole, String przeplywMaxZasole, String pw15Zaborze, String c15Zaborze, String pw20Zaborze, String c20Zaborze, String przeplywMinZaborze, String przeplywMaxZaborze, String pw15Hydrofornia, String c15Hydrofornia, String pw20Hydrofornia, String c20Hydrofornia, String odczytChelmek, String zuzycieChelmek) {
+    public void updateDataFromFacilitiesRecord(int idDanychZObiektow, String pw15Zasole, String c15Zasole, String pw20Zasole, String c20Zasole, String przeplywMinZasole, String przeplywMaxZasole, String pw15Zaborze, String c15Zaborze, String pw20Zaborze, String c20Zaborze, String przeplywMinZaborze, String przeplywMaxZaborze, String pw15Hydrofornia, String c15Hydrofornia, String pw20Hydrofornia, String c20Hydrofornia, String odczytChelmek, String zuzycieChelmek) {
         try {
             Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
             PreparedStatement updateQuery = connection.prepareStatement(UPDATE_DATA_FROM_FACILITIES_QUERY);
@@ -113,7 +113,7 @@ public class DataFromFacilitiesConnector {
             updateQuery.setString(16, c20Hydrofornia);
             updateQuery.setString(17, odczytChelmek);
             updateQuery.setString(18, zuzycieChelmek);
-            updateQuery.setString(19, idDanychZObiektow);
+            updateQuery.setInt(19, idDanychZObiektow);
             updateQuery.executeUpdate();
         } catch (SQLException e) {
             showAlert(e.getMessage());

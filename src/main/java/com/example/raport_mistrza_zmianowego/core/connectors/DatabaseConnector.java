@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class DatabaseConnector {
     //    connection settings
-    public static String DATABASE_URL = "jdbc:mysql://localhost:3306/raport_mistrza_zmianowego?useSSL=false";
+    public static String DATABASE_URL = "jdbc:mysql://localhost:3306/raport_mistrza_zmianowego?allowPublicKeyRetrieval=true&useSSL=false";
     public static String DATABASE_USERNAME = "root";
     public static String DATABASE_PASSWORD = "";
 

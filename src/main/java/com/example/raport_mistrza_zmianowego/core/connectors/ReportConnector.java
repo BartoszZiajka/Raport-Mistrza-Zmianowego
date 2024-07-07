@@ -2,6 +2,7 @@ package com.example.raport_mistrza_zmianowego.core.connectors;
 
 import com.example.raport_mistrza_zmianowego.controllers.LoginController;
 import com.example.raport_mistrza_zmianowego.core.model.Overtime;
+import com.example.raport_mistrza_zmianowego.core.model.Report;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -18,7 +19,7 @@ public class ReportConnector {
     private static final String INSERT_REPORT_QUERY = "INSERT INTO raporty (data_raportu, godziny_pracy, mistrz_zmiany, raport_zmiany, id_konta_uzytkownika, id_portierow, id_dyzurnych, id_danych_z_obiektow) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_REPORT_FROM_QUERY = "SELECT * FROM raporty WHERE data_raportu=(?) AND godziny_pracy=(?)";
     private static final String SELECT_REPORT_ID_QUERY = "SELECT id_raportu FROM raporty WHERE data_raportu=(?) AND godziny_pracy=(?)";
-    private static final String SELECT_REPORT_DATES_QUERY = "SELECT data_raportu, godziny_pracy FROM raporty ORDER BY data_raportu DESC";
+    private static final String SELECT_REPORT_DATES_QUERY = "SELECT id_raportu,data_raportu, godziny_pracy FROM raporty ORDER BY data_raportu DESC";
     private static final String SELECT_REPORT_DATES_FROM_SEARCH_QUERY = "SELECT data_raportu, godziny_pracy FROM raporty WHERE concat(data_raportu, ' ' ,godziny_pracy) LIKE '%(?)%'ORDER BY data_raportu DESC";
     private static final String SELECT_REPORT_DATES_FROM_ACCOUNT_QUERY = "SELECT data_raportu, godziny_pracy FROM raporty WHERE id_konta_uzytkownika=(?) ORDER BY data_raportu DESC";
     private static final String SELECT_REPORT_BY_ID_QUERY = "SELECT * FROM raporty " + "WHERE id_raportu=(?)";
@@ -105,7 +106,7 @@ public class ReportConnector {
             ResultSet result = selectQuery.executeQuery();
             List<String> employeesList = new ArrayList<>();
             while (result.next())
-                employeesList.add(result.getString("data_raportu") + " " + result.getString("godziny_pracy"));
+                employeesList.add(result.getString("id_raportu") + " " + result.getString("data_raportu") + " " + result.getString("godziny_pracy"));
             return FXCollections.observableList(employeesList);
         } catch (SQLException e) {
             showAlert(e.getMessage());
@@ -118,11 +119,11 @@ public class ReportConnector {
         try {
             Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_REPORT_DATES_QUERY);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet result = preparedStatement.executeQuery();
             List<String> employeesList = new ArrayList<>();
-            while (resultSet.next())
-                if (!(resultSet.getString("godziny_pracy")).contains("*"))
-                    employeesList.add(resultSet.getString("data_raportu") + " " + resultSet.getString("godziny_pracy"));
+            while (result.next())
+                if (!(result.getString("godziny_pracy")).contains("*"))
+                    employeesList.add(result.getString("id_raportu") + " " + result.getString("data_raportu") + " " + result.getString("godziny_pracy"));
             return FXCollections.observableList(employeesList);
         } catch (SQLException e) {
             showAlert(e.getMessage());
@@ -139,7 +140,7 @@ public class ReportConnector {
             List<String> employeesList = new ArrayList<>();
             while (result.next())
                 if ((result.getString("godziny_pracy")).contains("*"))
-                    employeesList.add(result.getString("data_raportu") + " " + result.getString("godziny_pracy"));
+                    employeesList.add(result.getString("id_raportu") + " " + result.getString("data_raportu") + " " + result.getString("godziny_pracy"));
             return FXCollections.observableList(employeesList);
         } catch (SQLException e) {
             showAlert(e.getMessage());
@@ -156,7 +157,7 @@ public class ReportConnector {
             ResultSet result = selectQuery.executeQuery();
             List<String> employeesList = new ArrayList<>();
             while (result.next())
-                employeesList.add(result.getString("data_raportu") + " " + result.getString("godziny_pracy"));
+                employeesList.add(result.getString("id_raportu") + " " + result.getString("data_raportu") + " " + result.getString("godziny_pracy"));
             return FXCollections.observableList(employeesList);
         } catch (SQLException e) {
             showAlert(e.getMessage());
@@ -173,7 +174,7 @@ public class ReportConnector {
             ResultSet result = selectQuery.executeQuery();
             List<String> employeesList = new ArrayList<>();
             while (result.next())
-                employeesList.add(result.getString("data_raportu") + " " + result.getString("godziny_pracy"));
+                employeesList.add(result.getString("id_raportu") + " " + result.getString("data_raportu") + " " + result.getString("godziny_pracy"));
             return FXCollections.observableList(employeesList);
         } catch (SQLException e) {
             showAlert(e.getMessage());
@@ -182,23 +183,62 @@ public class ReportConnector {
         }
     }
 
-    private Map<String, String> getReportRecord(int reportID) {
+    public Report getReportById(int id) {
         try {
             Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
             PreparedStatement selectQuery = connection.prepareStatement(SELECT_REPORT_BY_ID_QUERY);
-            selectQuery.setInt(1, reportID);
+            selectQuery.setInt(1, id);
             ResultSet result = selectQuery.executeQuery();
             result.next();
-            Map<String, String> reportRecord = new HashMap<>();
-            reportRecord.put("id_raportu", result.getString("id_raportu"));
-            reportRecord.put("godziny_pracy", result.getString("godziny_pracy"));
-            reportRecord.put("mistrz_zmiany", result.getString("mistrz_zmiany"));
-            reportRecord.put("raport_zmiany", result.getString("raport_zmiany"));
-            reportRecord.put("id_konta_uzytkownika", result.getString("id_konta_uzytkownika"));
-            reportRecord.put("id_portierow", result.getString("id_portierow"));
-            reportRecord.put("id_dyzurnych", result.getString("id_dyzurnych"));
-            reportRecord.put("id_danych_z_obiektow", result.getString("id_danych_z_obiektow"));
-            return reportRecord;
+
+            PortersConnector portersConnector = new PortersConnector();
+            Map<String, String> porters = portersConnector.getPortersFromReport(result.getInt("id_portierow"));
+
+            DutyOfficersConnector dutyOfficersConnector = new DutyOfficersConnector();
+            Map<String, String> dutyOfficers = dutyOfficersConnector.getDutyOfficersFromReport(result.getInt("id_dyzurnych"));
+
+            DataFromFacilitiesConnector dataFromFacilitiesConnector = new DataFromFacilitiesConnector();
+            Map<String, String> dataFromFacilities = dataFromFacilitiesConnector.getDataFromFacilitiesFromReport(result.getInt("id_danych_z_obiektow"));
+
+            OvertimesConnector overtimesConnector = new OvertimesConnector();
+
+            return new Report(result.getInt("id_raportu"),
+                    result.getString("data_raportu"),
+                    result.getString("godziny_pracy"),
+                    result.getString("mistrz_zmiany"),
+                    porters.get("od_godz"),
+                    porters.get("do_godz"),
+                    porters.get("portier_od"),
+                    porters.get("portier_do"),
+                    dutyOfficers.get("dyzur_zasole"),
+                    dutyOfficers.get("dyzur_zasole_2_zmiana"),
+                    dutyOfficers.get("dyzur_zaborze"),
+                    dutyOfficers.get("dyzur_zaborze_2_zmiana"),
+                    dutyOfficers.get("dyzur_hydrofornia"),
+                    dutyOfficers.get("dyzur_hydrofornia_2_zmiana"),
+                    dutyOfficers.get("dyzur_przepompownia"),
+                    dutyOfficers.get("dyzur_przepompownia_2_zmiana"),
+                    dataFromFacilities.get("pw15_zasole"),
+                    dataFromFacilities.get("c15_zasole"),
+                    dataFromFacilities.get("pw20_zasole"),
+                    dataFromFacilities.get("c20_zasole"),
+                    dataFromFacilities.get("przeplyw_min_zasole"),
+                    dataFromFacilities.get("przeplyw_max_zasole"),
+                    dataFromFacilities.get("pw15_zaborze"),
+                    dataFromFacilities.get("c15_zaborze"),
+                    dataFromFacilities.get("pw20_zaborze"),
+                    dataFromFacilities.get("c20_zaborze"),
+                    dataFromFacilities.get("przeplyw_min_zaborze"),
+                    dataFromFacilities.get("przeplyw_max_zaborze"),
+                    dataFromFacilities.get("pw15_hydrofornia"),
+                    dataFromFacilities.get("c15_hydrofornia"),
+                    dataFromFacilities.get("pw20_hydrofornia"),
+                    dataFromFacilities.get("c20_hydrofornia"),
+                    dataFromFacilities.get("odczyt_chelmek"),
+                    dataFromFacilities.get("zuzycie_chelmek"),
+                    result.getString("raport_zmiany"),
+                    overtimesConnector.getOvertimesById(result.getInt("id_raportu"))
+            );
         } catch (SQLException e) {
             showAlert(e.getMessage());
             printSQLException(e);
@@ -206,12 +246,11 @@ public class ReportConnector {
         }
     }
 
-    public void updateReport(String raportDate, String workingHours, String userAccountName, String portierDoGodz, String portierDo, String portierOdGodz, String portierOd, String dyzurZasole, String dyzurZasole1, String dyzurZaborze, String dyzurZaborze1, String dyzurHydrofornia, String dyzurHydrofornia1, String dyzurPrzepompownia, String dyzurPrzepompownia1, String raportZmiany, String pw15Zasole, String c15Zasole, String pw20Zasole, String c20Zasole, String przeplywMinZasole, String przeplywMaxZasole, String pw15Zaborze, String c15Zaborze, String pw20Zaborze, String c20Zaborze, String przeplywMinZaborze, String przeplywMaxZaborze, String pw15Hydrofornia, String c15Hydrofornia, String pw20Hydrofornia, String c20Hydrofornia, String odczytChelmek, String zuzycieChelmek) {
-        Map<String, String> reportRecord = getReportRecord(getReportID(raportDate, workingHours));
-        new PortersConnector().updatePortersFromReport(reportRecord.get("id_portierow"), portierDoGodz, portierOdGodz, portierDo, portierOd);
-        new DutyOfficersConnector().updateDutyOfficersFromReport(Integer.parseInt(reportRecord.get("id_dyzurnych")), dyzurZasole, dyzurZasole1, dyzurZaborze, dyzurZaborze1, dyzurHydrofornia, dyzurHydrofornia1, dyzurPrzepompownia, dyzurPrzepompownia1);
-        new DataFromFacilitiesConnector().updateDataFromFacilitiesRecord(reportRecord.get("id_danych_z_obiektow"), pw15Zasole, c15Zasole, pw20Zasole, c20Zasole, przeplywMinZasole, przeplywMaxZasole, pw15Zaborze, c15Zaborze, pw20Zaborze, c20Zaborze, przeplywMinZaborze, przeplywMaxZaborze, pw15Hydrofornia, c15Hydrofornia, pw20Hydrofornia, c20Hydrofornia, odczytChelmek, zuzycieChelmek);
-        updateReportRecord(getReportID(raportDate, workingHours), workingHours, userAccountName, raportZmiany);
+    public void updateReport(Report report) {
+        new PortersConnector().updatePortersFromReport(report.getId(), report.getPorterHourTo(), report.getPorterHourFrom(), report.getPorterNameTo(), report.getPorterNameFrom());
+        new DutyOfficersConnector().updateDutyOfficersFromReport(report.getId(), report.getStandbyZasoleFirstShift(), report.getStandbyZasoleSecondShift(), report.getStandbyZaborzeFirstShift(), report.getStandbyZaborzeSecondShift(), report.getStandbyHydroforniaFirstShift(), report.getStandbyHydroforniaSecondShift(), report.getStandbyPrzepompowniaFirstShift(), report.getStandbyPrzepompowniaSecondShift());
+        new DataFromFacilitiesConnector().updateDataFromFacilitiesRecord(report.getId(), report.getPw15Zasole(), report.getC15Zasole(), report.getPw20Zasole(), report.getC20Zasole(), report.getPrzeplywMinZasole(), report.getPrzeplywMaxZasole(), report.getPw15Zaborze(), report.getC15Zaborze(), report.getPw20Zaborze(), report.getC20Zaborze(), report.getPrzeplywMinZaborze(), report.getPrzeplywMaxZaborze(), report.getPw15Hydrofornia(), report.getC15Hydrofornia(), report.getPw20Hydrofornia(), report.getC20Hydrofornia(), report.getSprzedazChelmek(), report.getZuzycieChelmek());
+        updateReportRecord(report.getId(), report.getWorkingHours(), report.getDutyOfficer(), report.getShiftReport());
     }
 
     private void updateReportRecord(int reportID, String workingHours, String userAccountName, String shiftReport) {

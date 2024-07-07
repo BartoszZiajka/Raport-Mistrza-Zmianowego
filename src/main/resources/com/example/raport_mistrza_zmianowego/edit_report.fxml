@@ -9,7 +9,7 @@
             stylesheets="@css/stylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.raport_mistrza_zmianowego.controllers.EditReportController">
     <left>
-        <ListView fx:id="reportsDatesListView" maxHeight="875.0" prefWidth="200.0" BorderPane.alignment="TOP_CENTER"/>
+        <ListView fx:id="reportsListView" maxHeight="875.0" prefWidth="200.0" BorderPane.alignment="TOP_CENTER"/>
     </left>
     <center>
         <AnchorPane maxHeight="900.0" styleClass="pane">

@@ -110,7 +110,7 @@ public class PortersConnector {
         }
     }
 
-    public void updatePortersFromReport(String portersID, String until, String from, String porterUntil, String porterFrom) {
+    public void updatePortersFromReport(int portersID, String until, String from, String porterUntil, String porterFrom) {
         try {
             Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
             PreparedStatement updateQuery = connection.prepareStatement(UPDATE_PORTERS_FROM_REPORT_QUERY);
@@ -118,7 +118,7 @@ public class PortersConnector {
             updateQuery.setString(2, from);
             updateQuery.setString(3, porterUntil);
             updateQuery.setString(4, porterFrom);
-            updateQuery.setString(5, portersID);
+            updateQuery.setInt(5, portersID);
             updateQuery.executeUpdate();
         } catch (SQLException e) {
             showAlert(e.getMessage());

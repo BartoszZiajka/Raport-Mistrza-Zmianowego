@@ -69,7 +69,7 @@ public class OvertimesConnector {
         }
     }
 
-    public List<Overtime> getOvertimesFrom(int raportID) {
+    public List<Overtime> getOvertimesById(int raportID) {
         try {
             Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
             PreparedStatement selectQuery = connection.prepareStatement(SELECT_OVERTIMES_FROM_QUERY);
